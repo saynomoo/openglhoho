@@ -12,7 +12,7 @@ import android.opengl.GLUtils;
 
 public class OpenGLRenderer implements Renderer {
 
-    private Cube mCube;
+    private Donut mCube;
     private float mCubeRotation = 45f;
     private Context context;
 
@@ -45,7 +45,8 @@ public class OpenGLRenderer implements Renderer {
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT,
                 GL10.GL_NICEST);
         loadGLTexture(gl, context);
-        mCube = new Cube(textures);
+//        mCube = new Cube(textures);
+        mCube = new Donut(3,3);
 
     }
 
