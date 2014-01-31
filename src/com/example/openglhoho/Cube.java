@@ -35,10 +35,11 @@ public class Cube {
             4, 7, 6, 4, 6, 5,
             3, 0, 1, 3, 1, 2
     });
-    private ByteBuffer  mTextureIndexBuffer = initByteBuffer(new byte[]{
-            4, 7, 6, 4, 6, 5
-    });
     private FloatBuffer mTextureBuffer = initFloatBuffer(new float[]{
+            0.0f, 1.0f,     // top left     (V2)
+            0.0f, 0.0f,     // bottom left  (V1)
+            1.0f, 1.0f,     // top right    (V4)
+            1.0f, 0.0f,      // bottom right (V3)
             0.0f, 1.0f,     // top left     (V2)
             0.0f, 0.0f,     // bottom left  (V1)
             1.0f, 1.0f,     // top right    (V4)
@@ -78,13 +79,12 @@ public class Cube {
 //        gl.glColorPointer(4, GL10.GL_FLOAT, 0, mColorBuffer);
 
 
-//        gl.glDrawElements(GL10.GL_TRIANGLES, 36, GL10.GL_UNSIGNED_BYTE, mIndexBuffer);
-
-
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
         gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);
         gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, mTextureBuffer);
-        gl.glDrawElements(GL10.GL_TRIANGLES, 6, GL10.GL_UNSIGNED_BYTE, mTextureIndexBuffer);
+        gl.glDrawElements(GL10.GL_TRIANGLES, 36, GL10.GL_UNSIGNED_BYTE, mIndexBuffer);
+
+
         gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 
         gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
