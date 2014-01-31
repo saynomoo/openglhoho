@@ -72,11 +72,11 @@ public class Cube {
 
 
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-//        gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
+        gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
 
 
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0, mVertexBuffer);
-//        gl.glColorPointer(4, GL10.GL_FLOAT, 0, mColorBuffer);
+        gl.glColorPointer(4, GL10.GL_FLOAT, 0, mColorBuffer);
 
 
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
