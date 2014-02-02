@@ -80,7 +80,7 @@ public class OpenGLRenderer implements Renderer {
     }
 
     public void setAngle(float angle) {
-        mCubeRotation = 120*angle;
+        mCubeRotation = 180*angle;
     }
 
     /** The texture pointer */
