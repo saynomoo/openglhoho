@@ -13,7 +13,7 @@ import android.opengl.GLUtils;
 public class OpenGLRenderer implements Renderer {
 
     private Donut mCube;
-    private float mCubeRotation = 45f;
+    private float mCubeRotation = 1f;
     private Context context;
 
     public OpenGLRenderer(Context context) {
@@ -80,7 +80,7 @@ public class OpenGLRenderer implements Renderer {
     }
 
     public void setAngle(float angle) {
-        mCubeRotation = 45*angle;
+        mCubeRotation = 120*angle;
     }
 
     /** The texture pointer */
