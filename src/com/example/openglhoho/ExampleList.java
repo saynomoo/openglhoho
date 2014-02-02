@@ -53,8 +53,8 @@ class Example {
     }
     public static List<Example> examples(){
         return new ArrayList<Example>() {{
-            add(new Example(0, "Cube", "Draw indexed vertexes. Draw texture. Use colors. Rotate by touch events."));
-            add(new Example(0, "Donut", "Create triangle strip mesh."));
+            add(new Example(R.drawable.cube, "Cube", "Draw indexed vertexes. Draw texture. Use colors. Rotate by touch events."));
+            add(new Example(R.drawable.donut, "Donut", "Create triangle strip mesh."));
             add(new Example(0, "Particles", "A texture based star shower"));
         }};
     }
