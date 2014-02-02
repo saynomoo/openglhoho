@@ -46,7 +46,7 @@ public class OpenGLRenderer implements Renderer {
                 GL10.GL_NICEST);
         loadGLTexture(gl, context);
 //        mCube = new Cube(textures);
-        mCube = new Donut(3,3);
+        mCube = new Donut(30,30);
 
     }
 
