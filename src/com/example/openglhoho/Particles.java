@@ -1,8 +1,11 @@
 package com.example.openglhoho;
 
 import javax.microedition.khronos.opengles.GL10;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Random;
+
+import static com.example.openglhoho.Cube.initFloatBuffer;
 
 public class Particles implements Shape{
     private final Triangle triangle;
@@ -11,10 +14,17 @@ public class Particles implements Shape{
     int amount;
     private float distance;
     int maxAge = 100;
+    private int[] textures;
+    private FloatBuffer mTextureBuffer = initFloatBuffer(new float[]{
+            0.0f, 1.0f,     // top left     (V2)
+            0.0f, 0.0f,     // bottom left  (V1)
+            1.0f, 1.0f,     // top right    (V4)
+    });
 
-    public Particles(int amount, float distance) {
+    public Particles(int amount, float distance, int[] textures) {
         this.amount = amount;
         this.distance = distance;
+        this.textures = textures;
         triangle = new Triangle();
         rnd = new Random();
         ArrayList<Particle> al = new ArrayList<Particle>();
@@ -26,6 +36,10 @@ public class Particles implements Shape{
 
     @Override
     public void draw(GL10 gl) {
+        gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+        gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);
+        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, mTextureBuffer);
+
         for (int i = 0; i < particles.length; i++) {
             Particle particle = particles[i];
             if(particle.age==maxAge)refreshParticle(particle); else particle.age++;
@@ -41,6 +55,7 @@ public class Particles implements Shape{
                 gl.glPopMatrix();
             }
         }
+        gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
     }
 
     private Particle refreshParticle(Particle particle) {
