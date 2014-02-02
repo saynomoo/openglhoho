@@ -12,13 +12,25 @@ public class Donut {
     private final FloatBuffer vertexBuffer;
     private final ByteBuffer indexBuffer;
     private final int length;
+    private final FloatBuffer colorBuffer;
 
     public Donut(int x, int y) {
         float[] vertexes = createVertexes(x, y);
         vertexBuffer = Cube.initFloatBuffer(vertexes);
+        float[] colors = createColors(vertexes);
+        colorBuffer = Cube.initFloatBuffer(colors);
         byte[] indexes = createIndexes(x, y);
         length = indexes.length;
         indexBuffer = Cube.initByteBuffer(indexes);
+    }
+
+    private float[] createColors(float[] vertexes) {
+        ArrayList<Float> al = new ArrayList<Float>();
+        for (int i = 0; i < vertexes.length; i++) {
+            al.add(vertexes[i]);
+            if(i>0 && i%3==0) al.add(1.0f);
+        }
+        return ArrayUtils.toPrimitive(al.toArray(new Float[al.size()]));
     }
 
     private byte[] createIndexes(int x, int y) {
@@ -54,11 +66,11 @@ public class Donut {
 
 
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-//        gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
+        gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
 
 
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
-  //      gl.glColorPointer(4, GL10.GL_FLOAT, 0, mColorBuffer);
+        gl.glColorPointer(4, GL10.GL_FLOAT, 0, colorBuffer);
 
 
         gl.glDrawElements(GL10.GL_TRIANGLE_STRIP, length, GL10.GL_UNSIGNED_BYTE, indexBuffer);
@@ -66,7 +78,7 @@ public class Donut {
 
 
         gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-//        gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
+        gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
 
     }
 }
