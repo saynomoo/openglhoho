@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-public class Cube {
+public class Cube implements Shape {
 
     private FloatBuffer mVertexBuffer = initFloatBuffer(new float[]{
             -1.0f, -1.0f, -1.0f,

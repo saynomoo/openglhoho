@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
-public class Donut {
+public class Donut implements Shape {
 
     private final FloatBuffer vertexBuffer;
     private final ByteBuffer indexBuffer;
