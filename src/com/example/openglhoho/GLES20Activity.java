@@ -54,6 +54,14 @@ public class GLES20Activity extends Activity {
                 }
             };
             case 1: return new OpenGLRenderer(this, new Donut(15,15));
+            case 2: return new OpenGLRenderer(this, null) {
+                @Override
+                public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+                    super.onSurfaceCreated(gl, config);
+                    shape = new Particles(100);
+                }
+            };
+
         }
         return null;
     }
