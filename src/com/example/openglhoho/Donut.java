@@ -16,8 +16,8 @@ public class Donut {
     public Donut(int x, int y) {
         float[] vertexes = createVertexes(x, y);
         vertexBuffer = Cube.initFloatBuffer(vertexes);
-        length = 2*(x+1) * (y + 2);//y+2 for degenerate triangles
         byte[] indexes = createIndexes(x, y);
+        length = indexes.length;
         indexBuffer = Cube.initByteBuffer(indexes);
     }
 
