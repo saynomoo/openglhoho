@@ -49,6 +49,7 @@ public class GLES20Activity extends Activity {
                 @Override
                 public void onSurfaceCreated(GL10 gl, EGLConfig config) {
                     super.onSurfaceCreated(gl, config);
+                    translationZ = -10f;
                     shape = new Cube(loadGLTexture(gl, getBaseContext(), R.drawable.lemur));
                 }
             };
