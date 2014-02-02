@@ -29,7 +29,7 @@ public class Donut {
                 al.add((byte) (i*y+j));
                 al.add((byte) ((i+1)*y+j));
             }
-            al.add((byte) (2*y-1));
+            al.add((byte) ((i+1)*y+y-1));
         }
         return ArrayUtils.toPrimitive(al.toArray(new Byte[al.size()]));
     }
