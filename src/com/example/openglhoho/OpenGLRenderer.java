@@ -45,7 +45,7 @@ public class OpenGLRenderer implements Renderer {
 
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT,
                 GL10.GL_NICEST);
-        loadGLTexture(gl, context);
+        loadGLTexture(gl, context, R.drawable.lemur);
     }
 
 
@@ -81,11 +81,9 @@ public class OpenGLRenderer implements Renderer {
         mCubeRotation = 180*angle;
     }
 
-    /** The texture pointer */
-    private int[] textures = new int[1];
-
-    public void loadGLTexture(GL10 gl, Context context) {
-        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.lemur);
+    public static int[] loadGLTexture(GL10 gl, Context context, int resource) {
+        int[] textures = new int[1];
+        Bitmap b = BitmapFactory.decodeResource(context.getResources(), resource);
         Bitmap bitmap = ScalePowerof2.scalePowerof2(b);
         gl.glGenTextures(1, textures, 0);
         gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);
@@ -95,6 +93,7 @@ public class OpenGLRenderer implements Renderer {
 
         GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
         bitmap.recycle();
+        return textures;
     }
 
 }
