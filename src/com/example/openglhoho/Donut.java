@@ -22,16 +22,16 @@ public class Donut {
     }
 
     private byte[] createIndexes(int x, int y) {
-        byte[] indexes = new byte[this.length];
+        ArrayList<Byte> al = new ArrayList<Byte>();
         for(int i=0; i<x; i++) {
-            indexes[2*i*(y+1)] = (byte) (i*y);
+            al.add((byte) (i*y));
             for(int j=0; j<y; j++) {
-                indexes[2*i*(y+1)+2*j+1] = (byte) (i*y+j);
-                indexes[2*i*(y+1)+2*j+2] = (byte) ((i+1)*y+j);
+                al.add((byte) (i*y+j));
+                al.add((byte) ((i+1)*y+j));
             }
-            indexes[(i*2)*(y+1)+1] = (byte) (2*y-1);//TODO indeksi väärin
+            al.add((byte) (2*y-1));
         }
-        return indexes;
+        return ArrayUtils.toPrimitive(al.toArray(new Byte[al.size()]));
     }
 
     private float[] createVertexes(int x, int y) {
