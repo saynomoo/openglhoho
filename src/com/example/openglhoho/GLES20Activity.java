@@ -8,6 +8,9 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 public class GLES20Activity extends Activity {
 
 
@@ -22,7 +25,7 @@ public class GLES20Activity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        final OpenGLRenderer renderer = new OpenGLRenderer(this, createShape(shapeIndex()));
+        final OpenGLRenderer renderer = createRenderer(shapeIndex());
         GLSurfaceView view = new GLSurfaceView(this){
             @Override
             public boolean onTouchEvent(MotionEvent e) {
@@ -40,14 +43,21 @@ public class GLES20Activity extends Activity {
         setContentView(view);
     }
 
-    private int shapeIndex() {
-        return getIntent().getIntExtra(EXAMPLE, 0);
-    }
-    private Shape createShape(int position) {
+    private OpenGLRenderer createRenderer(int position) {
         switch (position) {
-            case 0: return new Cube(new int[1]);
-            case 1: return new Donut(15,15);
+            case 0: return new OpenGLRenderer(this, null) {
+                @Override
+                public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+                    super.onSurfaceCreated(gl, config);
+                    shape = new Cube(loadGLTexture(gl, getBaseContext(), R.drawable.lemur));
+                }
+            };
+            case 1: return new OpenGLRenderer(this, new Donut(15,15));
         }
         return null;
+    }
+
+    private int shapeIndex() {
+        return getIntent().getIntExtra(EXAMPLE, 0);
     }
 }
