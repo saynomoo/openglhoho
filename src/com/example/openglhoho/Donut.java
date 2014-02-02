@@ -50,12 +50,12 @@ public class Donut {
         ArrayList<Float> al = new ArrayList<Float>();
         for(int i=0; i<x; i++) {
             double alphaAngle = Math.PI*2*i/x;
+            double r1 = 3*Math.cos(alphaAngle);
             for(int j=0; j<y; j++) {
                 double betaAngle = Math.PI*2*j/y;
-                double r = Math.sin(betaAngle)/3+0.6;
-                al.add((float) (r*Math.cos(betaAngle)));
-                al.add((float) (r*Math.sin(alphaAngle)));
-                al.add((float) (r*Math.cos(alphaAngle)));
+                al.add((float) (Math.sin(betaAngle)));
+                al.add((float) (Math.cos(betaAngle) + r1));
+                al.add((float) (Math.sin(alphaAngle)));
             }
         }
         return ArrayUtils.toPrimitive(al.toArray(new Float[al.size()]));
