@@ -19,7 +19,7 @@ public class Donut {
         vertexBuffer = Cube.initFloatBuffer(vertexes);
         float[] colors = createColors(vertexes);
         colorBuffer = Cube.initFloatBuffer(colors);
-        byte[] indexes = createIndexes(x, y);
+        byte[] indexes = createIndexes(x+1, y+1);
         length = indexes.length;
         indexBuffer = Cube.initByteBuffer(indexes);
     }
@@ -48,10 +48,10 @@ public class Donut {
 
     private float[] createVertexes(int x, int y) {
         ArrayList<Float> al = new ArrayList<Float>();
-        for(int i=0; i<x; i++) {
+        for(int i=0; i<=x; i++) {
             double alphaAngle = Math.PI*2*i/x;
             double r1 = 3*Math.cos(alphaAngle);
-            for(int j=0; j<y; j++) {
+            for(int j=0; j<=y; j++) {
                 double betaAngle = Math.PI*2*j/y;
                 al.add((float) (Math.sin(betaAngle)));
                 al.add((float) (Math.cos(betaAngle) + r1));
