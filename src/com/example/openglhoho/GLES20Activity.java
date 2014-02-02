@@ -58,8 +58,10 @@ public class GLES20Activity extends Activity {
                 @Override
                 public void onSurfaceCreated(GL10 gl, EGLConfig config) {
                     super.onSurfaceCreated(gl, config);
-                    shape = new Particles(100);
-                }
+                    shape = new Particles(300, 10f);
+                    translationZ = -100f;
+                    gl.glEnable(GL10.GL_BLEND);
+                    gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);                }
             };
 
         }
