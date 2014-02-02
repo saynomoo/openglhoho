@@ -11,6 +11,27 @@ public class Donut {
     private final int length;
 
     public Donut(int x, int y) {
+        float[] vertexes = createVertexes(x, y);
+        vertexBuffer = Cube.initFloatBuffer(vertexes);
+        length = 2*(x+1) * (y + 2);//y+2 for degenerate triangles
+        byte[] indexes = createIndexes(x, y);
+        indexBuffer = Cube.initByteBuffer(indexes);
+    }
+
+    private byte[] createIndexes(int x, int y) {
+        byte[] indexes = new byte[this.length];
+        for(int i=0; i<x; i++) {
+            indexes[2*i*(y+1)] = (byte) (i*y);
+            for(int j=0; j<y; j++) {
+                indexes[2*i*(y+1)+2*j+1] = (byte) (i*y+j);
+                indexes[2*i*(y+1)+2*j+2] = (byte) ((i+1)*y+j);
+            }
+            indexes[(i*2)*(y+1)+1] = (byte) (2*y-1);//TODO indeksi väärin
+        }
+        return indexes;
+    }
+
+    private float[] createVertexes(int x, int y) {
         float[] vertexes = new float[x*y*3];
         for(int i=0; i<x; i++) {
             double alphaAngle = Math.PI*2*i/x;
@@ -22,19 +43,9 @@ public class Donut {
                 vertexes[3*i*y+3*j+2] = (float) (r*Math.cos(alphaAngle)); // betakin vaikuttaa..
             }
         }
-        vertexBuffer = Cube.initFloatBuffer(vertexes);
-        length = 2*(x+1) * (y + 2);//y+2 for degenerate triangles
-        byte[] indexes = new byte[this.length];
-        for(int i=0; i<x; i++) {
-            indexes[2*i*(y+1)] = (byte) (i*y);
-            for(int j=0; j<y; j++) {
-                indexes[2*i*(y+1)+2*j+1] = (byte) (i*y+j);
-                indexes[2*i*(y+1)+2*j+2] = (byte) ((i+1)*y+j);
-            }
-            indexes[(i*2)*(y+1)+1] = (byte) (2*y-1);//TODO indeksi väärin
-        }
-        indexBuffer = Cube.initByteBuffer(indexes);
+        return vertexes;
     }
+
     public void draw(GL10 gl) {
         gl.glFrontFace(GL10.GL_CW);
 
