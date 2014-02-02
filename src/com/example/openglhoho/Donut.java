@@ -61,7 +61,6 @@ public class Donut {
   //      gl.glColorPointer(4, GL10.GL_FLOAT, 0, mColorBuffer);
 
 
-        gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
         gl.glDrawElements(GL10.GL_TRIANGLE_STRIP, length, GL10.GL_UNSIGNED_BYTE, indexBuffer);
 
 
