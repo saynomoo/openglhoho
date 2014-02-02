@@ -1,8 +1,11 @@
 package com.example.openglhoho;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import javax.microedition.khronos.opengles.GL10;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 
 public class Donut {
 
@@ -32,18 +35,18 @@ public class Donut {
     }
 
     private float[] createVertexes(int x, int y) {
-        float[] vertexes = new float[x*y*3];
+        ArrayList<Float> al = new ArrayList<Float>();
         for(int i=0; i<x; i++) {
             double alphaAngle = Math.PI*2*i/x;
             for(int j=0; j<y; j++) {
                 double betaAngle = Math.PI*2*j/y;
                 double r = Math.sin(betaAngle)/3+0.6;
-                vertexes[3*i*y+3*j] = (float) (r*Math.cos(betaAngle));
-                vertexes[3*i*y+3*j+1] = (float) (r*Math.sin(alphaAngle));
-                vertexes[3*i*y+3*j+2] = (float) (r*Math.cos(alphaAngle)); // betakin vaikuttaa..
+                al.add((float) (r*Math.cos(betaAngle)));
+                al.add((float) (r*Math.sin(alphaAngle)));
+                al.add((float) (r*Math.cos(alphaAngle)));
             }
         }
-        return vertexes;
+        return ArrayUtils.toPrimitive(al.toArray(new Float[al.size()]));
     }
 
     public void draw(GL10 gl) {
