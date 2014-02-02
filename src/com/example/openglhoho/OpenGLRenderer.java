@@ -12,7 +12,7 @@ import android.opengl.GLUtils;
 
 public class OpenGLRenderer implements Renderer {
 
-    private final Shape shape;
+    protected Shape shape;
     private float mCubeRotation = 1f;
     private Context context;
 
@@ -39,12 +39,9 @@ public class OpenGLRenderer implements Renderer {
         gl.glClearDepthf(1.0f);
         gl.glEnable(GL10.GL_DEPTH_TEST);
         gl.glEnable(GL10.GL_TEXTURE_2D);
-//        gl.glEnable(GL10.GL_BLEND);
-  //      gl.glBlendFunc(GL10.GL_ONE, GL10.GL_SRC_COLOR);
         gl.glDepthFunc(GL10.GL_LEQUAL);
 
-        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT,
-                GL10.GL_NICEST);
+        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT,GL10.GL_NICEST);
         loadGLTexture(gl, context, R.drawable.lemur);
     }
 
@@ -61,8 +58,6 @@ public class OpenGLRenderer implements Renderer {
         shape.draw(gl);
 
         gl.glLoadIdentity();
-
-        //mCubeRotation -= 0.15f;
     }
 
     @Override
