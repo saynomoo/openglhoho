@@ -33,6 +33,7 @@ public class ExampleList extends Activity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(ExampleList.this, GLES20Activity.class);
+                    intent.putExtra(GLES20Activity.EXAMPLE, position);
                     startActivity(intent);
                 }
             });

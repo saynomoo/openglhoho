@@ -11,6 +11,8 @@ import android.view.WindowManager;
 public class GLES20Activity extends Activity {
 
 
+    public static final String EXAMPLE = "INTENT_EXTRA_EXAMPLE";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class GLES20Activity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        final OpenGLRenderer renderer = new OpenGLRenderer(this);
+        final OpenGLRenderer renderer = new OpenGLRenderer(this, createShape(shapeIndex()));
         GLSurfaceView view = new GLSurfaceView(this){
             @Override
             public boolean onTouchEvent(MotionEvent e) {
@@ -36,5 +38,16 @@ public class GLES20Activity extends Activity {
         };
         view.setRenderer(renderer);
         setContentView(view);
+    }
+
+    private int shapeIndex() {
+        return getIntent().getIntExtra(EXAMPLE, 0);
+    }
+    private Shape createShape(int position) {
+        switch (position) {
+            case 0: return new Cube(new int[1]);
+            case 1: return new Donut(15,15);
+        }
+        return null;
     }
 }
