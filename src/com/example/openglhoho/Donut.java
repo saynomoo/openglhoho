@@ -36,7 +36,7 @@ public class Donut {
     private byte[] createIndexes(int x, int y) {
         ArrayList<Byte> al = new ArrayList<Byte>();
         for(int i=0; i<x-1; i++) {
-            al.add((byte) (i*y));
+            if(i>0)al.add((byte) (i*y));
             for(int j=0; j<y; j++) {
                 al.add((byte) (i*y+j));
                 al.add((byte) ((i+1)*y+j));
